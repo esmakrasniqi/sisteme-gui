@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>FIEK Cinema</title>
+<!-- for-mobile-apps -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<meta name="keywords" content="Movie Ticket Booking Widget Responsive, Login form web template, Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<!-- //for-mobile-apps -->
+<link href='//fonts.googleapis.com/css?family=Kotta+One' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/jquery.seat-charts.js"></script>
+<script src="js/filmat.js"></script>
+</head>
+<body>
+<div class="content">
+	<h1>Rezervoni ulësen tuaj tani!</h1>
+	<div class="main">
+		<h2>Kinemaja FIEK: Salla 1</h2>
+		<div class="demo">
+			<div id="seat-map">
+				<div class="front">Salla</div>					
+			</div>
+			<div class="booking-details">
+				<ul class="book-left">
+					<li>Filmi: </li>
+					<li>Koha: </li>
+					<li>Bileta:</li>
+					<li>Total:</li>
+					<li>Ulëset:</li>
+				</ul>
+				<ul class="book-right">
+					<li> <select id="test" name="form_select" onchange="showDiv(this)">
+						   <option value="0">Bloodshot</option>
+						   <option value="1">No Time To Die</option>
+						   <option value="2">Fast and Furious 9</option>
+						   <option value="3">Black Widow</option>
+						   <option value="4">Godzilla vs Kong</option>
+						   <option value="5">Top Gun: Maverick</option>
+						   <option value="6">Dolittle</option>
+						   <option value="7">Top Gun: Maverick</option>
+						</select>
+						<div id="hidden_div" style="display:none;">
+							<select>
+							<option value="0">SOT 16:15</option>
+						   <option value="1">Neser 18:00</option>
+						   <option value="2">Pasneser 20:30</option></select>
+						</div>
+					<li></li>
+					<li><span id="counter">0</span></li>
+					<li><b><span id="total">0</span><i> €</i></b></li>
+				</ul>
+				<div class="clear"></div>
+				<ul id="selected-seats" class="scrollbar scrollbar1"></ul>
+			
+						
+				<button class="checkout-button"><a href="fatura.html">Proceso</a></button>	
+				<div id="legend"></div>
+			</div>
+			<div style="clear:both"></div>
+	    </div>
+
+			<script type="text/javascript">
+				var price = 3.50; //price
+				$(document).ready(function() {
+					var $cart = $('#selected-seats'), //Sitting Area
+					$counter = $('#counter'), //Votes
+					$total = $('#total'); //Total money
+					
+					var sc = $('#seat-map').seatCharts({
+						map: [  //Seating chart
+							'aaaaaaaaaa',
+							'aaaaaaaaaa',
+							'__________',
+							'aaaaaaaa__',
+							'aaaaaaaaaa',
+							'aaaaaaaaaa',
+							'aaaaaaaaaa',
+							'aaaaaaaaaa',
+							'aaaaaaaaaa',
+							'__aaaaaa__'
+						],
+						naming : {
+							top : false,
+							getLabel : function (character, row, column) {
+								return column;
+							}
+						},
+						legend : { //Definition legend
+							node : $('#legend'),
+							items : [
+								[ 'a', 'available',   'E lirë' ],
+								[ 'a', 'unavailable', 'E shitur'],
+								[ 'a', 'selected', 'E zgjedhur']
+							]					
+						},
+						click: function () { //Click event
+							if (this.status() == 'available') { //optional seat
+								$('<li>Rreshti '+(this.settings.row+1)+' Ulësja '+this.settings.label+'</li>')
+									.attr('id', 'cart-item-'+this.settings.id)
+									.data('seatId', this.settings.id)
+									.appendTo($cart);
+
+								$counter.text(sc.find('selected').length+1);
+								$total.text(recalculateTotal(sc)+price);
+											
+								return 'selected';
+							} else if (this.status() == 'selected') { //Checked
+									//Update Number
+									$counter.text(sc.find('selected').length-1);
+									//update totalnum
+									$total.text(recalculateTotal(sc)-price);
+										
+									//Delete reservation
+									$('#cart-item-'+this.settings.id).remove();
+									//optional
+									return 'available';
+							} else if (this.status() == 'unavailable') { //sold
+								return 'unavailable';
+							} else {
+								return this.style();
+							}
+						}
+					});
+					//sold seat
+					sc.get(['1_1','1_2', '4_4','4_5','6_6','6_7','8_5','8_6','8_7','8_8', '10_1', '10_2']).status('unavailable');
+						
+				});
+				//sum total money
+				function recalculateTotal(sc) {
+					var total = 0;
+					sc.find('selected').each(function () {
+						total += price;
+					});
+							
+					return total;
+				}
+			</script>
+	</div>
+	<p class="copy_rights">&copy; 2020 FIEK CINEMA | All Rights Reserved</a></p>
+</div>
+<script src="js/jquery.nicescroll.js"></script>
+<script src="js/scripts.js"></script>
+</body>
+</html>
