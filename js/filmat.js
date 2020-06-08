@@ -1,5 +1,5 @@
 function showDiv(select){
-						   if(select.value==0){
+						   if(select.value==1){
 						    document.getElementById('hidden_div').style.display = "block";
 						   }
 						   else{
