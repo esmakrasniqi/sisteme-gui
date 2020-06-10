@@ -4,41 +4,15 @@
 <title>Fiek Cinema</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
-<link rel="stylesheet" href="css/lightbox.css" type="text/css" media="all" />
+<script src='js/jquery.min.js'></script>
 <script src='js/jquery.color-RGBa-patch.js'></script>
 <script src='js/example.js'></script>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script src="js/lightbox.js"></script>
+
 <script type="text/javascript">
 	function openWin() {
     window.open("web/index.html");
           }
    </script>
-<script>
-  jQuery(document).ready(function($) {
-      $('a').smoothScroll({
-        speed: 1000,
-        easing: 'easeInOutCubic'
-      });
-
-      $('.showOlderChanges').on('click', function(e){
-        $('.changelog .old').slideDown('slow');
-        $(this).fadeOut();
-        e.preventDefault();
-      })
-  });
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-2196019-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
 </head>
 <body>
 <div class="header">
@@ -61,7 +35,6 @@
 <div class="block">
 	<div class="wrap">
 			<div style="float:right; margin:30px; margin-top: -20px;">
-			<a href="login.html" style="background-color: transparent; color:orange;font-weight: bold;">SIGN IN  </a>
 			<a href="web/index.html" class="watch_but">  REZERVO BILETE</a>
 		</div>
 		<div class="clear"></div>

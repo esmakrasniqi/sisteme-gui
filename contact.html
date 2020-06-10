@@ -7,8 +7,9 @@
 <script src='js/jquery.min.js'></script>
 <script src='js/jquery.color-RGBa-patch.js'></script>
 <script src='js/example.js'></script>
+
 <script type="text/javascript">
-	function validateForm() {
+function validateForm() {
   var x = document.forms["myForm"]["fname"].value;
   if (x == "") {
     alert("Ju lutem mbushni të dhënat");
@@ -16,6 +17,62 @@
   }
 }
 </script>
+<script>
+function checkemail(){
+	var str=document.myForm.email.value
+	var len=str.length
+	var iat=str.indexOf("@")
+	var idot=str.indexOf(".")
+	var idot2=str.indexOf(".",iat)
+	if(iat<1||(iat>idot2)|| idot2>=len-1){
+		document.getElementById("m_email").innerHTML="Ju lutem shkruani email valid";
+		document.getElementById("m_email").style.color="red" ;
+		document.myForm.email.focus();
+		return false;
+	}else{
+		document.getElementById("m_email").innerHTML="Emaili në rregull";
+		document.getElementById("m_email").style.color="green";
+		return true;
+	}
+}
+</script>
+<script type="text/javascript">
+	function isNumber(char){
+	var numcheck = /\D/;
+	for(i=0;i<char.length;i++){
+		if(numcheck.test(char.charAt(i)))
+			return false;
+	}	
+	return true;
+}
+
+</script>
+<script type="text/javascript">
+function checkphno(){	
+	var len=document.myForm.phno.value.length
+		if(len==0){
+			document.getElementById("m_phno").innerHTML="";
+			return true;
+		}
+		else if(isNumber(document.myForm.phno.value)){
+			if(len==9){
+				document.getElementById("m_phno").innerHTML="Numri i telefonit OK";
+				document.getElementById("m_phno").style.color="green" ;
+				return true;
+			}else{
+				document.getElementById("m_phno").innerHTML="Telefoni duhet ti perbaje 9 numra (04x-xxx-xxx) ";
+				document.getElementById("m_phno").style.color="red" ;			
+			}
+		}else{
+			document.getElementById("m_phno").innerHTML="Telefoni mund të përmbajë vetëm numra";
+			document.getElementById("m_phno").style.color="red" ;
+			}	
+	return false;
+}
+
+</script>
+
+
 </head>
 <body>
 <div class="header">
@@ -39,7 +96,6 @@
 <div class="block">
 	<div class="wrap">
      	<div style="float:right; margin:30px; margin-top: -20px;">
-           <a href="login.html" style="background-color: transparent; color:orange;font-weight: bold;">SIGN IN  </a>
            <a href="web/index.html" class="watch_but">  REZERVO BILETE</a>
         </div>
         <div class="clear"></div>
@@ -53,27 +109,34 @@
 				<div class="col span_2_of_3">
 				  <div class="contact-form">
 				  	<h3>Na Kontaktoni</h3>
-					    <form name="myForm" onsubmit="return validateForm()" method="post">
+					    <form name="myForm" onsubmit="return validateForm()" method="post" action="contact.php">
 					    	<div>
 						    	<span><label>EMRI</label></span>
 						    	<span><input type="text" value="" name="fname"></span>
 						    </div>
 						    <div>
-						    	<span><label>E-MAIL</label></span>
-						    	<span><input type="text" value="" name="fname"></span>
+						    	<span><label id="m_email">E-MAIL</label></span>
+						    	<span><input name="email" type="text" onkeyup="checkemail()"></span>
 						    </div>
 						    <div>
-						     	<span><label>TELEFONI</label></span>
-						    	<span><input type="text" value="" name="fname"></span>
+						     	<span><label id=m_phno>TELEFONI</label></span>
+						    	<span><input type="text" value="" name="phno" onkeyup="checkphno()">
 						    </div>
 						    <div>
 						    	<span><label>SUBJEKTI</label></span>
-						    	<span><textarea> </textarea></span>
+						    	<span><textarea  name="Message"  maxlength="6000" required></textarea></span>
 						    </div>
 						   <div>
 						   		<span><input type="submit" value="Submit"></span>
 						  </div>
 					    </form>
+					    <div id="error_message" style="width:100%; height:100%; display:none; ">
+						<h4>Error</h4>
+						Ndodhi një gabim gjatë dërgimit të mesazhit.
+						</div>
+						<div id="success_message" style="width:100%; height:100%; display:none; ">
+						<h2>Mesazhi juaj u dërgua!</h2>
+						</div>
 				  </div>
   				</div>
 				<div class="col span_1_of_3">
