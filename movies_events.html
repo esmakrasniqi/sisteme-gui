@@ -8,7 +8,8 @@
 <script src='js/jquery.min.js'></script>
 <script src='js/jquery.color-RGBa-patch.js'></script>
 <script src='js/example.js'></script>
-
+<link rel="stylesheet" href="css/chat.css" type="text/css" media="all" />
+<script src='js/validimi.js'></script>
 <script type="text/javascript">
 	function openWin() {
     window.open("web/index.html");
@@ -211,6 +212,33 @@
 	<div class="copy">
 		<p class="copy_rights">&copy; 2020 FIEK CINEMA | All Rights Reserved</a></p>
 	</div>
+		</div>
+		<button class="open-button" onclick="openForm()">Keni nevojë për ndihmë?</button>
+
+		<div class="chat-popup" id="myForm">
+		  <form name="myForm" onsubmit="validateForm()" method="post" class="form-container" action="">
+		  	<h2>NDIHMË</h2>
+							    	<div>
+								    	<span><label>Emri:</label></span><br>
+								    	<span><input type="text" value="" name="fname" required></span>
+								    </div>
+								    <div>
+								    	<span><label id="m_email">Email:</label></span><br>
+								    	<span><input name="email" type="text" onkeyup="checkemail()" required></span>
+								    </div>
+								    <div>
+								     	<span><label id=m_phno>Telefoni:</label></span><br>
+								    	<span><input type="text" value="" name="phno" onkeyup="checkphno()" required="">
+								    </div>
+								    <div>
+								    	<span><label>Mesazhi:</label></span><br>
+								    	<span><textarea  name="msg" maxlength="6000" placeholder="Shkruani mesazhin.." required></textarea></span>
+								    </div>
+								   <div>
+								   		    <button type="submit" class="btn">Dërgo</button>
+		    								<button type="button" class="btn cancel" onclick="closeForm()">Anulo</button>
+								  </div>
+							    </form> 
 		</div>
 </div>
 </body>
